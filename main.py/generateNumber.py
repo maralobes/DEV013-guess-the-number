@@ -31,7 +31,7 @@ def userGuess():
 
 def computerGuess():
     computerGuess = random.randint(lowerNumber, upperNumber)
-    return computerGuess
+    print(computerGuess)
 
 #User input guess validation
             
@@ -68,23 +68,27 @@ def game():
             winner = True
             break
         else:
-            print(f"{result1}. Try again!")
+            print(result1)
+            print("It is Computer turn!")
+
     if not winner:
         print(f"Sorry, you ran out of attemps! The secret number is {secretNumber}.")
-
-
-    while attemps <=maxAttemp:
+        
+        while attemps <= maxAttemp:
          attemps += 1
          guess2 = computerGuess()
          result2 = checkComputerGuess(guess2, secretNumber)
          
-         if result2 == 'Yes, you win':
+         if result2 == 'Correct':
             print(f"Congrats! You guessed the secret number {secretNumber} in {attemps} attemps.")
             winner = True
             break
          else:
-            print(f"{result2}. Try again!")
+            print(result2)
+            print("It is User turn!")
 
 if __name__ == "_main_":
     print("Welcome to Guess the Number game!")
     game()
+
+game()
