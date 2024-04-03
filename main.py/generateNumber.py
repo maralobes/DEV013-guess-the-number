@@ -6,7 +6,7 @@ import random
 
 lowerNumber = 1
 upperNumber = 100
-maxAttemp = 5
+maxAttemp = 10
 
 #I need to generate a random number with lower and upper values
 
@@ -31,7 +31,7 @@ def userGuess():
 
 def computerGuess():
     computerGuess = random.randint(lowerNumber, upperNumber)
-    print(computerGuess)
+    return computerGuess
 
 #User input guess validation
             
@@ -62,6 +62,8 @@ def game():
 
         guess1 = userGuess()
         result1 = checkUserGuess(guess1, secretNumber)
+        guess2 = computerGuess()
+        result2 = checkComputerGuess(guess2, secretNumber)
 
         if result1 == 'Correct':
             print(f"Congrats! You guessed the secret number {secretNumber} in {attemps} attemps.")
@@ -70,25 +72,19 @@ def game():
         else:
             print(result1)
             print("It is Computer turn!")
-
-    if not winner:
-        print(f"Sorry, you ran out of attemps! The secret number is {secretNumber}.")
-        
-        while attemps <= maxAttemp:
-         attemps += 1
-         guess2 = computerGuess()
-         result2 = checkComputerGuess(guess2, secretNumber)
-         
-         if result2 == 'Correct':
+                      
+        if result2 == 'Correct':
             print(f"Congrats! You guessed the secret number {secretNumber} in {attemps} attemps.")
             winner = True
             break
-         else:
+        else:
+            print(f"{computerGuess}")
             print(result2)
             print("It is User turn!")
+    if not winner:
+        print(f"Sorry, you ran out of attemps! The secret number is {secretNumber}.")
 
 if __name__ == "_main_":
     print("Welcome to Guess the Number game!")
     game()
-
 game()
