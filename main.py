@@ -1,6 +1,5 @@
 '''I need import random module'''
 import random
-#I need to asign the range and maximum attemps
 LOWER_NUMBER = 1
 UPPER_NUMBER = 100
 #I need to generate a random number with
@@ -15,8 +14,7 @@ def user_guess(lower_number, upper_number):
             guess = int(input(f"Enter a number between {lower_number} and {upper_number}:  "))
             if validate_user_input(guess, lower_number, upper_number):
                 return guess
-            else:
-                print('Incorrect input. Please, enter a number between 1 and 100, inclusive. \n \n')
+            print('Incorrect input. Please, enter a number between 1 and 100, inclusive. \n \n')
         except ValueError:
             print('Incorrect input. Please, enter a valid number.\n \n')
 #Create computer input
@@ -25,22 +23,27 @@ def computer_guess(lower_number, upper_number):
     return random.randint(lower_number, upper_number)
 #Valide user input
 def validate_user_input(guess, lower_number, upper_number):
-    ''''If number is ok in terms of limits it is return'''
+    ''''If guessed number is ok in terms of limits it is return'''
     return lower_number <= guess <= upper_number
 #User input guess validation
 def check_guess(guess, secret_number):
-    ''''Return a message depending on the gessed number'''
-    if guess == secret_number: return 'Correct'
-    elif guess < secret_number: return 'Too low \n \n'
-    else: return 'Too high \n \n'
+    ''''Return a message depending on the guessed number'''
+    if guess == secret_number:
+        return 'Correct'
+    if guess < secret_number:
+        return 'Too low \n \n'
+    return 'Too high \n \n'
 def ask_if_want_to_play_again(answer):
     ''''This method ask player if want to play again or not'''
     answer = input("Do you want to play again? (Y/n)")
     answer = str.lower(answer).strip()
-    answer = bool('' and 'y' in 'yes')
-    answer = not bool('' and 'y' in 'yes')
+    if answer == '' or answer == 'y' or answer == 'yes':
+        answer = True
+    else:
+        answer = False
     return answer
 def game(lower_number, upper_number, answer = True):
+    ''''This is the method that runs the game'''
     if answer == False:
         print("See you later!")
         return
@@ -63,19 +66,17 @@ def game(lower_number, upper_number, answer = True):
             answer = ask_if_want_to_play_again(answer)
             game(lower_number, upper_number, answer)
             break
-        else:
-            print(result1)
-            print("It is Computer turn!")
+        print(result1)
+        print("It is Computer turn!")
         if result2 == 'Correct':
             print(f"Congrats! You guessed the secret number {secret_number} in {attemps} attemps.")
             print(f"Your numbers were {",".join(map(str, computer_number_attemps))} \n \n")
             answer = ask_if_want_to_play_again(answer)
             game(lower_number, upper_number, answer)
             break
-        else:
-            print(guess2)
-            print(result2)
-            print("It is User turn!")
+        print(guess2)
+        print(result2)
+        print("It is User turn!")
 if __name__ == "__main__":
     print("Welcome to Guess the Number game! \n \n")
     game(LOWER_NUMBER, UPPER_NUMBER, answer= True)
