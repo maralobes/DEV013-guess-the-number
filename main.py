@@ -54,6 +54,7 @@ def game(lower_number, upper_number, answer = True):
     user_number_attemps = []
     computer_number_attemps = []
     secret_number = generate_secret_number(lower_number, upper_number)
+    print(secret_number)
     while True:
         attemps += 1
         guess1 = user_guess(lower_number, upper_number)
